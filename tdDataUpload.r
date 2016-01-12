@@ -174,10 +174,10 @@ tdDataUpload <- function(connection, connection_fast = NULL, data.base.name = NU
   if(fast == T){
     
     #in case last job failed 
-    if(tdExistsTable(data.base, paste0(table.name,"_err_1"), conn)) dbSendUpdate(conn, paste0("drop table ",table.name,"_err_1"))
-    if(tdExistsTable(data.base, paste0(table.name,"_err_2"), conn)) dbSendUpdate(conn, paste0("drop table ",table.name,"_err_2"))    
-    if(tdExistsTable(data.base, paste0(table.name,"_ERR_1"), conn)) dbSendUpdate(conn, paste0("drop table ",table.name,"_ERR_1"))
-    if(tdExistsTable(data.base, paste0(table.name,"_ERR_2"), conn)) dbSendUpdate(conn, paste0("drop table ",table.name,"_ERR_2"))
+    if(tdExistsTable(data.base, paste0(table.name,"_err_1"), conn)) dbSendUpdate(conn, paste0("drop table ",target.name,"_err_1"))
+    if(tdExistsTable(data.base, paste0(table.name,"_err_2"), conn)) dbSendUpdate(conn, paste0("drop table ",target.name,"_err_2"))    
+    if(tdExistsTable(data.base, paste0(table.name,"_ERR_1"), conn)) dbSendUpdate(conn, paste0("drop table ",target.name,"_ERR_1"))
+    if(tdExistsTable(data.base, paste0(table.name,"_ERR_2"), conn)) dbSendUpdate(conn, paste0("drop table ",target.name,"_ERR_2"))
     
     sstime <- Sys.time()
     cat("fastload starting. \n")
