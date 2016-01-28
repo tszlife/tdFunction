@@ -112,8 +112,9 @@ tdDataUpload <- function(connection, connection_fast = NULL, data.base.name = NU
   data.base  <- data.base.name
   table.name <- table.name
   conn_f     <- connection_fast  
-  data       <- data.frame(data)
+  data       <- as.data.frame(data)
   
+
   if(fast == T) {
     if(is.null(connection_fast)) {stop('connection_fast is needed for fastload. assign 2nd connection with "TYPE=FASTLOADCSV,tmode=ANSI" in connection script.')}
     if(is.null(primaryIndex)) {stop('primaryIndex is needed for large amount of data. assign column(s) to be PI with providing column number(s) , e.g., c(1:5).')}
@@ -137,7 +138,8 @@ tdDataUpload <- function(connection, connection_fast = NULL, data.base.name = NU
     }
   }
   
-  
+  logical_column <- which(unlist(lapply(data,data.class)) == 'logical')
+  for( i in logical_column ){ data[,i] <- ifelse(data[,i],1,0 )}
   
   if(!is.null(primaryIndex)) {
     replace <- TRUE
@@ -229,4 +231,3 @@ tdDataUpload <- function(connection, connection_fast = NULL, data.base.name = NU
   # ending
   cat("\n\n")
 }
-
